@@ -9,7 +9,7 @@ struct MyStruct {
 
 int main() {
     // 구조체를 원소로 갖는 vector 생성
-    std::list<MyStruct*> myVector;
+    std::vector<MyStruct*> myVector;
 
     // 동적 할당된 구조체를 vector에 추가
     MyStruct* ptr1 = new MyStruct{1, "John"};
