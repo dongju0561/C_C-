@@ -1,4 +1,5 @@
 #include <iostream>
+#include<typeinfo>
 #include <vector>
 
 // 예제를 위한 구조체 정의
@@ -6,6 +7,8 @@ struct MyStruct {
     int id;
     std::string name;
 };
+
+using namespace std;
 
 int main() {
     // 구조체를 원소로 갖는 vector 생성
