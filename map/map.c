@@ -1,19 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#define TABLE_SIZE 100
-
-typedef struct Entry {
-    char *key;
-    int value;
-    struct Entry *next;
-} Entry;
-
-typedef struct {
-    //Entry의 주소를 저장하기 위한 공간
-    Entry *entries[TABLE_SIZE];
-} HashTable;
+#include "map.h"
 
 //해쉬함수
 unsigned int hash(const char *key) {
@@ -26,7 +14,7 @@ unsigned int hash(const char *key) {
 
 HashTable *create_table() {
     //table 초기화
-    HashTable *table = malloc(sizeof(HashTable));
+    HashTable *table = (HashTable *)malloc(sizeof(HashTable));
     for (int i = 0; i < TABLE_SIZE; i++) {
         table->entries[i] = NULL;
     }
@@ -45,12 +33,12 @@ void insert(HashTable *table, const char *key, int value) {
     if (entry == NULL) {
 
         //Entry를 위한 동적할당을 진행하고 Entry 구조체 속성 초기화
-        entry = malloc(sizeof(Entry));
+        entry = (Entry *)malloc(sizeof(Entry));
         entry->key = strdup(key);
         entry->value = value;
         entry->next = NULL;
 
-        //생성한 Entry의 주소를 Entry와 맵핌된 인덱스으로 테이블 공간에 접근/저장
+        //생성한 Entry의 주소를 Entry와 맵핑된 인덱스으로 테이블 공간에 접근/저장
         table->entries[slot] = entry;
 
     //만약 인덱스 
@@ -74,7 +62,7 @@ void insert(HashTable *table, const char *key, int value) {
         //NULL을 만났다면
 
         //새로운 메모리공간을 할당하고
-        entry = malloc(sizeof(Entry));
+        entry = (Entry *)malloc(sizeof(Entry));
 
         //전달받은 새로운 데이터로 entry에 초기화
         entry->key = strdup(key);
@@ -119,21 +107,4 @@ void free_table(HashTable *table) {
     }
     //table도 할당 해제
     free(table);
-}
-
-int main() {
-    HashTable *table = create_table();
-
-    insert(table, "apple", 1);
-    insert(table, "banana", 2);
-    insert(table, "orange", 3);
-
-    printf("apple: %d\n", get(table, "apple"));
-    printf("banana: %d\n", get(table, "banana"));
-    printf("orange: %d\n", get(table, "orange"));
-    printf("grape: %d\n", get(table, "grape"));  // 없는 키
-
-    free_table(table);
-
-    return 0;
 }
