@@ -46,6 +46,7 @@ int main(){
     }
 
     //단어 갯수 세기
+    //해쉬테이블의 entry 배열을 순회하면서 해당공간의 일련의 entry를 출력하는 함수
     for (int i = 0; i < TABLE_SIZE; i++) {
         Entry *entry = hashTable->entries[i];
         while (entry != NULL) {

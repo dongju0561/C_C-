@@ -13,9 +13,9 @@ int main(){
         printf("파일열기 성공\n");
     }
 
-    fputc('a', fp);
-    fputc('b', fp);
-    fputc('c', fp);
+    // fputc('a', fp);
+    // fputc('b', fp);
+    // fputc('c', fp);
     fputs("\nhello world", fp);
 
     fclose(fp);
